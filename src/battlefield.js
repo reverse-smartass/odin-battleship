@@ -1,19 +1,19 @@
 export class battlefield {
-  #boardDimension = 14;
+  boardDimension = 14;
 
   constructor() {
     this.board = [];
     this.misses = [];
     this.ships = [];
-    for (let i = 0; i < this.#boardDimension; i++) {
+    for (let i = 0; i < this.boardDimension; i++) {
       this.board[i] = [];
-      for (let j = 0; j < this.#boardDimension; j++) {
+      for (let j = 0; j < this.boardDimension; j++) {
         this.board[i][j] = null;
       }
     }
   }
 
-  addShip(ship, isVertical, column, row) {
+  addShip(ship, isVertical, row, column) {
     let r;
     let c;
 
@@ -23,16 +23,16 @@ export class battlefield {
       c = isVertical ? column : column + i;
 
       if (
-        r >= this.#boardDimension ||
+        r >= this.boardDimension ||
         r < 0 ||
-        c >= this.#boardDimension ||
+        c >= this.boardDimension ||
         c < 0
       )
         return false;
 
-      if (this.board[c][r] !== null) return false;
+      if (this.board[r][c] !== null) return false;
 
-      staging.push([c, r]);
+      staging.push([r, c]);
     }
 
     this.ships.push(ship);
@@ -45,20 +45,20 @@ export class battlefield {
     return true;
   }
 
-  receiveAttack(column, row){
-    if(this.board[column][row]){
-      this.board[column][row].ship.hit();
-      this.board[column][row].ship.updateStatus();
+  receiveAttack(row, column) {
+    if (this.board[row][column]) {
+      this.board[row][column].ship.hit();
+      this.board[row][column].ship.updateStatus();
       return true;
-    }else{
-      this.misses.push([column, row]);
+    } else {
+      this.misses.push([row, column]);
       return false;
     }
   }
 
-  allShipsDown(){
-    for(let i = 0; i < this.ships.length; i++){
-      if(!this.ships[i].sunk){
+  allShipsDown() {
+    for (let i = 0; i < this.ships.length; i++) {
+      if (!this.ships[i].sunk) {
         return false;
       }
     }

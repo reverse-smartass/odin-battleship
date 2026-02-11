@@ -11,13 +11,15 @@ export class ship{
     }
 
     updateStatus(){
+        console.log("length "+ this.len + " hits " + this.hits);
+        
         if(this.isSunk()){
             this.sunk = true;
         }
     }
 
     isSunk(){
-        return this.hits >= this.len;
+        return this.hits === this.len;
     }
 
     isHitting(coor){
@@ -34,6 +36,6 @@ export class ship{
     }
 
     hit(){
-        this.hits++;
+        this.hits+=1;
     }
 }

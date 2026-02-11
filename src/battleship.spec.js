@@ -41,5 +41,13 @@ describe("battlefield.js", () => {
     expect(bf.misses).toStrictEqual([[3,0], [4,0]]);
   })
 
+
+  test("over", () => {
+    bf.receiveAttack(2,0);
+    bf.receiveAttack(3,0);
+    bf.receiveAttack(4,0);
+    expect(s.hits).toBe(1);
+    expect(bf.misses).toStrictEqual([[3,0], [4,0]]);
+  })
 });
 
