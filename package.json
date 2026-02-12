@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "webpack ",
     "dev": "webpack serve ",
-    "deploy": "npm run build && git add dist -f && git commit -m \"Deployment commit\" && git subtree push --prefix dist origin gh-pages2",
+    "deploy": "npm run build && git add dist -f && git commit -m \"Deployment commit\" && git subtree push --prefix dist origin gh-deploy",
     "start": "npm run build && npm run dev",
     "commit": "git add . && git commit -m \"commit\" && git push",
     "watch" : "jest --watch ./src/*.js"
