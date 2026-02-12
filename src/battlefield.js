@@ -2,6 +2,10 @@ export class battlefield {
   boardDimension = 14;
 
   constructor() {
+    this.reset();
+  }
+
+  reset(){
     this.board = [];
     this.misses = [];
     this.ships = [];

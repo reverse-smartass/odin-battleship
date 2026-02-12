@@ -18,11 +18,12 @@ export class player {
 
   boardReceiveAttack(row, column) {
     let result = this.playerBoard.receiveAttack(row, column);
-    if (result) {
-      if (this.playerBoard.allShipsDown()) {
-        alert(`game over, ${this.opponent.playerName} wins`);
-      }
+    console.log(result);
+
+    if (this.playerBoard.allShipsDown()) {
+      alert(`game over, ${this.opponent.playerName} wins`);
     }
+
     return result;
   }
 
@@ -34,7 +35,7 @@ export class player {
     const board = this.playerBoard;
     const index = Math.floor(Math.random() * board.availableMoves.length);
     let move = board.giveAvailableMove(index);
-    console.log(move);
+    //console.log(move);
     return {
       result: this.attackOpponent(move[0][0], move[0][1]),
       row: move[0][0],

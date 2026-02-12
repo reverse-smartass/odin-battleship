@@ -11,11 +11,10 @@ export class ship{
     }
 
     updateStatus(){
-        //console.log("length "+ this.len + " hits " + this.hits);
-        
         if(this.isSunk()){
             this.sunk = true;
         }
+        console.log("length "+ this.len + " hits " + this.hits +" sunk " + this.sunk);
     }
 
     isSunk(){

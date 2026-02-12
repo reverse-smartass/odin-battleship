@@ -34,20 +34,19 @@ describe("battlefield.js", () => {
   });
 
   test("receive", () => {
-    bf.receiveAttack(2,0);
-    bf.receiveAttack(3,0);
-    bf.receiveAttack(4,0);
+    expect(bf.receiveAttack(2,0)).toBe(true);
+    bf.receiveAttack(2,1);
+    bf.receiveAttack(2,2);
     expect(s.hits).toBe(1);
-    expect(bf.misses).toStrictEqual([[3,0], [4,0]]);
+    expect(bf.misses).toStrictEqual([[2,1], [2,2]]);
   })
 
 
   test("over", () => {
-    bf.receiveAttack(2,0);
     bf.receiveAttack(3,0);
     bf.receiveAttack(4,0);
-    expect(s.hits).toBe(1);
-    expect(bf.misses).toStrictEqual([[3,0], [4,0]]);
+    expect(s.hits).toBe(3);
+    expect(bf.allShipsDown()).toStrictEqual(true);
   })
 });
 

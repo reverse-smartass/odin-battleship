@@ -36,7 +36,7 @@ export class htmlBoard {
         }
         cas.id = this.player.playerName + i + j;
         cas.addEventListener("click", () => {
-          if (board.receiveAttack(i, j)) {
+          if (this.player.boardReceiveAttack(i, j)) {
             cas.classList.replace("ship", "shiphit");
           } else {
             cas.classList.add("shipmiss");
