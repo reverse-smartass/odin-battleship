@@ -41,7 +41,7 @@ body {
 }
 
 .shiphit,
-.shipmiss {
+.shipmiss, .disable {
   pointer-events: none;
   cursor: not-allowed;
 }

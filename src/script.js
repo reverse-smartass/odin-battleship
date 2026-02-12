@@ -7,7 +7,7 @@ let vertical = true;
 let horizontal = false;
 
 let p1 = new player("p1", false);
-let p2 = new player("p2", true);
+let p2 = new player("p2 (computer)", true);
 p1.setOpponent(p2);
 p2.setOpponent(p1);
 

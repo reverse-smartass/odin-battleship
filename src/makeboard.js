@@ -8,9 +8,13 @@ export class htmlBoard {
   makeGrid(side) {
     this.grid.innerHTML = "";
 
-    let board =  this.player.playerBoard;
+    let board = this.player.playerBoard;
 
     let caseSide = (window.innerHeight * 0.8) / side;
+
+    let header = document.createElement("h1");
+    header.innerText = `${this.player.opponent.playerName}`;
+    this.grid.append(header);
 
     for (let i = 0; i < side; i++) {
       let row = document.createElement("div");
@@ -30,30 +34,29 @@ export class htmlBoard {
         if (this.player.playerBoard.board[i][j]) {
           cas.classList.add("ship");
         }
-        cas.id = this.player.playerName+i+j;
+        cas.id = this.player.playerName + i + j;
         cas.addEventListener("click", () => {
-            if (board.receiveAttack(i, j)){
-                cas.classList.replace("ship", "shiphit");
-            }else{
-                cas.classList.add("shipmiss");
-            }
-           
-            if(board.allShipsDown()){
-                alert(`game over, ${this.player.opponent.playerName} wins`);
-            }
+          if (board.receiveAttack(i, j)) {
+            cas.classList.replace("ship", "shiphit");
+          } else {
+            cas.classList.add("shipmiss");
+          }
 
-            if(this.player.iscpu){
-                const attack = this.player.opponent.CPUAttack();
-                let div = document.getElementById(`${this.player.opponent.playerName}${attack.row}${attack.column}`);
-                if(attack.result){
-                    div.classList.add("shiphit");
-                }else{
-                    div.classList.add("shipmiss");
-                }
-                
+          if (this.player.iscpu) {
+            const attack = this.player.CPUAttack();
+            let div = document.getElementById(
+              `${this.player.opponent.playerName}${attack.row}${attack.column}`,
+            );
+            if (attack.result) {
+              div.classList.add("shiphit");
+            } else {
+              div.classList.add("shipmiss");
             }
+          }
         });
-
+        if (!this.player.iscpu) {
+          cas.classList.add("disable");
+        }
         row.append(cas);
       }
       this.grid.append(row);
