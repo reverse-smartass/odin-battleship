@@ -11,7 +11,7 @@ export class ship{
     }
 
     updateStatus(){
-        console.log("length "+ this.len + " hits " + this.hits);
+        //console.log("length "+ this.len + " hits " + this.hits);
         
         if(this.isSunk()){
             this.sunk = true;

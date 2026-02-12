@@ -5,12 +5,15 @@ export class battlefield {
     this.board = [];
     this.misses = [];
     this.ships = [];
+    this.availableMoves = [];
     for (let i = 0; i < this.boardDimension; i++) {
       this.board[i] = [];
       for (let j = 0; j < this.boardDimension; j++) {
         this.board[i][j] = null;
+        this.availableMoves.push([i,j]);
       }
     }
+    
   }
 
   addShip(ship, isVertical, row, column) {
@@ -54,6 +57,10 @@ export class battlefield {
       this.misses.push([row, column]);
       return false;
     }
+  }
+
+  giveAvailableMove(index){
+    return this.availableMoves.splice(index,1);
   }
 
   allShipsDown() {

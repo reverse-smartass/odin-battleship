@@ -2,12 +2,11 @@ export class htmlBoard {
   constructor(p, id) {
     this.player = p;
     this.divID = id;
+    this.grid = document.getElementById(this.divID);
   }
 
-  grid = document.getElementById(this.divID);
-
   makeGrid(side) {
-    grid.innerHTML = "";
+    this.grid.innerHTML = "";
 
     let board =  this.player.playerBoard;
 
@@ -31,6 +30,7 @@ export class htmlBoard {
         if (this.player.playerBoard.board[i][j]) {
           cas.classList.add("ship");
         }
+        cas.id = this.player.playerName+i+j;
         cas.addEventListener("click", () => {
             if (board.receiveAttack(i, j)){
                 cas.classList.replace("ship", "shiphit");
@@ -39,13 +39,24 @@ export class htmlBoard {
             }
            
             if(board.allShipsDown()){
-                alert('game over');
+                alert(`game over, ${this.player.opponent.playerName} wins`);
+            }
+
+            if(this.player.iscpu){
+                const attack = this.player.opponent.CPUAttack();
+                let div = document.getElementById(`${this.player.opponent.playerName}${attack.row}${attack.column}`);
+                if(attack.result){
+                    div.classList.add("shiphit");
+                }else{
+                    div.classList.add("shipmiss");
+                }
+                
             }
         });
 
         row.append(cas);
       }
-      grid.append(row);
+      this.grid.append(row);
     }
   }
 }
