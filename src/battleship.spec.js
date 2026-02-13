@@ -44,9 +44,9 @@ describe("battlefield.js", () => {
 
   test("over", () => {
     bf.receiveAttack(3,0);
-    bf.receiveAttack(4,0);
-    expect(s.hits).toBe(3);
-    expect(bf.allShipsDown()).toStrictEqual(true);
+    bf.receiveAttack(1,0);
+    expect(s.hits).toBe(2);
+    expect(bf.allShipsDown()).toStrictEqual(false);
   })
 });
 

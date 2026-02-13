@@ -46,3 +46,51 @@ p2board.makeGrid(p2.playerBoard.boardDimension);
   p2board.makeGrid(p2.playerBoard.boardDimension);
 });
  */
+
+function randomMinMax(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+function addRandomShips(board, minLength, maxLength) {
+  const nbShips = 5;
+
+  let isVertical = [true, false];
+
+  let availableCoordinates = board.availableMoves.slice();
+
+  for (let i = 0; i < nbShips; i++) {
+    let found = false;
+    let direction = isVertical[Math.floor(Math.random() * 2)];
+    let length = randomMinMax(minLength, maxLength);
+    let place;
+    while (!found) {
+      let index = Math.floor(Math.random() * availableCoordinates.length);
+      place = availableCoordinates[index];
+
+
+      if(validShipPlacement(length, place[0], place[1], direction, board)){
+        found = true;
+        board.addShip(new ship(length), direction, place[0], place[1]);
+        if(direction){
+          for(let j = 0; j < length; j++){
+            availableCoordinates.splice(index + j * board.boardDimension, 1);
+          }
+        }else{
+          availableCoordinates.splice(index, length);
+        }
+      }
+    }
+
+  }
+}
+
+function validShipPlacement(length, row, column, isVertical, board) {
+  for (let i = 0; i < length; i++) {
+    let r = isVertical ? row + i : row;
+    let c = isVertical ? column : column + i;
+    if (board[r][c]) {
+      return false;
+    }
+  }
+  return true;
+}
